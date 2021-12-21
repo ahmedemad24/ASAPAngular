@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="GetAllPeople()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    <button mat-icon-button color="weith" (click)="CreateNewPerson()">
+      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+    </button>
+    <mat-form-field appearance="standard" [hidden]="Filter">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="ApplyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+</mat-toolbar>
+
+<div class="mat-elevation-z8">
+  <table id="excel-table" mat-table [dataSource]="DataSource" matSort>
+    <ng-container matColumnDef="PersonID">
+      <th mat-header-cell *matHeaderCellDef> Addresses </th>
+      <td mat-cell *matCellDef="let row">
+        <a routerLink="/Home/Address/{{row.personId}}" mat-icon-button
+          aria-label="Example icon button with a open in new tab icon">
+          <mat-icon>find_in_page</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="PersonName">
+      <th mat-header-cell *matHeaderCellDef > Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.personName}} </td>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef>
+
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent">
+            <mat-icon aria-label="Edit" (click)="EditPerson(row.personId, row.personName)"style="color: yellow;">edit
+            </mat-icon>
+          </button>
+
+          <button mat-icon-button color="accent"
+            (click)="DeletePerson(row.personId, row.personName)">
+            <mat-icon aria-label="Delete" style="color: red;">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </mat-header-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="DisplayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: DisplayColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+    <h3 mat-dialog-title>Edit Person</h3>
+  
+    <form class="mat-dialog-content" (ngSubmit)="stopEdit()" #formControl="ngForm">
+  
+      <div class="form" style="display: none !important;" >
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" [(ngModel)]="data.personId" name="personId" >
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput type="text" #input class="form-control" placeholder="personName" [(ngModel)]="data.personName" name="Serial" >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-button (click)="RefreshPeopleList()"  type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" >Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+  </div>

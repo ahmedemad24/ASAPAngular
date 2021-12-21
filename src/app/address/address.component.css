@@ -1,0 +1,22 @@
+table {
+  width: 170%;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+td, th {
+  width: 26%; 
+}
+
+p {
+  font-family: Lato;
+}
+
+mat-checkbox {
+  margin: 1rem;
+}
+
+mat-table {
+  margin-top: 1rem;
+}
